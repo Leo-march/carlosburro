@@ -1,66 +1,86 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// src/app/page.tsx
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { WarehouseProvider } from '@/context/WarehouseContext';
+import WarehouseMap from '@/components/WarehouseMap';
+import Dashboard from '@/components/Dashboard';
+import ProblemModal from '@/components/ProblemModal';
+import ProblemDetail from '@/components/ProblemDetail';
+import { Problem } from '@/types';
+import styles from './main.module.css';
+
+function WarehouseApp() {
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'mapa'>('dashboard');
+  const [selectedColumn, setSelectedColumn] = useState<string | null>(null);
+  const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
+  const [highlightedColumn, setHighlightedColumn] = useState<string | null>(null);
+
+  const handleColumnClick = (columnId: string) => {
+    setSelectedColumn(columnId);
+  };
+
+  const handleProblemClick = (problem: Problem) => {
+    setSelectedProblem(problem);
+  };
+
+  const handleNavigateToMap = (columnId: string) => {
+    setActiveTab('mapa');
+    setHighlightedColumn(columnId);
+    setTimeout(() => setHighlightedColumn(null), 3000);
+  };
+
   return (
-    <div className={styles.page}>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>🏭 Sistema de Gestão de Depósito</h1>
+        <nav className={styles.nav}>
+          <button
+            className={`${styles.navBtn} ${activeTab === 'dashboard' ? styles.active : ''}`}
+            onClick={() => setActiveTab('dashboard')}
+          >
+            📊 Dashboard
+          </button>
+          <button
+            className={`${styles.navBtn} ${activeTab === 'mapa' ? styles.active : ''}`}
+            onClick={() => setActiveTab('mapa')}
+          >
+            🗺️ Mapa
+          </button>
+        </nav>
+      </header>
+
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        {activeTab === 'dashboard' && (
+          <Dashboard onProblemClick={handleProblemClick} />
+        )}
+        {activeTab === 'mapa' && (
+          <WarehouseMap onColumnClick={handleColumnClick} />
+        )}
       </main>
+
+      {selectedColumn && (
+        <ProblemModal
+          columnId={selectedColumn}
+          onClose={() => setSelectedColumn(null)}
+        />
+      )}
+
+      {selectedProblem && (
+        <ProblemDetail
+          problem={selectedProblem}
+          onClose={() => setSelectedProblem(null)}
+          onNavigateToMap={handleNavigateToMap}
+        />
+      )}
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <WarehouseProvider>
+      <WarehouseApp />
+    </WarehouseProvider>
   );
 }
