@@ -8,7 +8,7 @@ import Dashboard from '@/components/Dashboard';
 import ProblemModal from '@/components/ProblemModal';
 import ProblemDetail from '@/components/ProblemDetail';
 import { Problem } from '@/types';
-import styles from './main.module.css';
+import styles from './page.module.css';
 
 function WarehouseApp() {
   const [activeTab, setActiveTab] = useState<'dashboard' | 'mapa'>('dashboard');

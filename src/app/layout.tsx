@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import "./globals.css";
+import "./global.css";
 
 export const metadata: Metadata = {
   title: "Sistema de Gestão de Depósito",
