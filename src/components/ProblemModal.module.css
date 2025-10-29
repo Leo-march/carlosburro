@@ -7,11 +7,12 @@
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.2s;
+  animation: fadeIn 0.3s ease-out;
 }
 
 @keyframes fadeIn {
@@ -25,22 +26,23 @@
 
 .modal {
   background: white;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 0;
   max-width: 500px;
   width: 90%;
   max-height: 90vh;
   overflow: auto;
-  animation: slideUp 0.3s;
+  animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes slideUp {
   from {
-    transform: translateY(20px);
+    transform: translateY(40px) scale(0.95);
     opacity: 0;
   }
   to {
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     opacity: 1;
   }
 }
@@ -50,13 +52,15 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 2px solid #f0f0f0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
 .header h2 {
   margin: 0;
   font-size: 20px;
   color: #333;
+  font-weight: 600;
 }
 
 .closeBtn {
@@ -67,18 +71,19 @@
   color: #666;
   line-height: 1;
   padding: 0;
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  transition: all 0.2s;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .closeBtn:hover {
   background: #f5f5f5;
   color: #333;
+  transform: rotate(90deg);
 }
 
 .form {
@@ -86,54 +91,88 @@
 }
 
 .field {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .field label {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
+  margin-bottom: 10px;
+  font-weight: 600;
   color: #333;
+  font-size: 14px;
 }
 
 .select,
 .textarea {
   width: 100%;
-  padding: 12px;
+  padding: 14px 16px;
   border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 12px;
   font-size: 14px;
   font-family: inherit;
-  transition: border-color 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
 }
 
 .select:focus,
 .textarea:focus {
   outline: none;
   border-color: #4CAF50;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.1);
+  transform: translateY(-2px);
+}
+
+.select:hover,
+.textarea:hover {
+  border-color: #999;
 }
 
 .textarea {
   resize: vertical;
-  min-height: 100px;
+  min-height: 120px;
+  line-height: 1.6;
 }
 
 .actions {
   display: flex;
   gap: 12px;
   justify-content: flex-end;
-  margin-top: 24px;
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 2px solid #f0f0f0;
 }
 
 .cancelBtn,
 .submitBtn {
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 14px 28px;
+  border-radius: 12px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.cancelBtn::before,
+.submitBtn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.cancelBtn:active::before,
+.submitBtn:active::before {
+  width: 300px;
+  height: 300px;
 }
 
 .cancelBtn {
@@ -143,15 +182,19 @@
 
 .cancelBtn:hover {
   background: #e0e0e0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .submitBtn {
-  background: #4CAF50;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
   color: white;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .submitBtn:hover {
-  background: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -161,6 +204,7 @@
 
   .header {
     border-bottom-color: #333;
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
   }
 
   .header h2 {
@@ -187,6 +231,11 @@
     color: #ededed;
   }
 
+  .select:hover,
+  .textarea:hover {
+    border-color: #555;
+  }
+
   .select:focus,
   .textarea:focus {
     border-color: #4CAF50;
@@ -199,5 +248,9 @@
 
   .cancelBtn:hover {
     background: #333;
+  }
+
+  .actions {
+    border-top-color: #333;
   }
 }

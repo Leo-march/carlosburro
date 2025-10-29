@@ -2,29 +2,64 @@
 
 .container {
   width: 100%;
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .container h2 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   color: #333;
-  font-size: 24px;
+  font-size: 26px;
+  font-weight: 600;
+  position: relative;
+  padding-left: 20px;
+}
+
+.container h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 32px;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
 }
 
 .map {
   width: 100%;
   height: auto;
   border: 2px solid #e0e0e0;
-  border-radius: 8px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.map:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) inset;
 }
 
 @media (prefers-color-scheme: dark) {
   .container {
-    background: #1a1a1a;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 
   .container h2 {
@@ -33,5 +68,6 @@
 
   .map {
     border-color: #333;
+    background: #1a1a1a;
   }
 }
