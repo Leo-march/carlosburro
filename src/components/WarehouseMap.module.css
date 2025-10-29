@@ -1,0 +1,37 @@
+/* src/components/WarehouseMap.module.css */
+
+.container {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.container h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.map {
+  width: 100%;
+  height: auto;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .container h2 {
+    color: #ededed;
+  }
+
+  .map {
+    border-color: #333;
+  }
+}

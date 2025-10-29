@@ -1,0 +1,290 @@
+/* src/components/ProblemDetail.module.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s;
+  }
+  
+  .modal {
+    background: white;
+    border-radius: 12px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow: auto;
+    animation: slideUp 0.3s;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 10;
+  }
+  
+  .header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+  }
+  
+  .closeBtn {
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #666;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  
+  .closeBtn:hover {
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  .content {
+    padding: 24px;
+  }
+  
+  .mainInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    margin-bottom: 24px;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .label {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+  }
+  
+  .value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .tipo {
+    padding: 8px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+  }
+  
+  .section {
+    margin-bottom: 24px;
+  }
+  
+  .section h3 {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .descricao {
+    color: #666;
+    line-height: 1.6;
+    padding: 16px;
+    background: #f8f8f8;
+    border-radius: 8px;
+  }
+  
+  .statusButtons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .statusBtn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 16px;
+    border: 2px solid #e0e0e0;
+    background: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #666;
+  }
+  
+  .statusBtn:hover {
+    border-color: #4CAF50;
+    background: #f1f8f4;
+  }
+  
+  .statusBtn.active {
+    border-color: #4CAF50;
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .infoRow {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px;
+    background: #f8f8f8;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .infoLabel {
+    font-weight: 500;
+    color: #666;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .mapBtn,
+  .deleteBtn {
+    flex: 1;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .mapBtn {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .mapBtn:hover {
+    background: #45a049;
+  }
+  
+  .deleteBtn {
+    background: #f44336;
+    color: white;
+  }
+  
+  .deleteBtn:hover {
+    background: #da190b;
+  }
+  
+  @media (max-width: 600px) {
+    .mainInfo {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+  
+    .statusButtons {
+      flex-direction: column;
+    }
+  
+    .statusBtn {
+      width: 100%;
+    }
+  
+    .actions {
+      flex-direction: column;
+    }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .modal {
+      background: #1a1a1a;
+    }
+  
+    .header {
+      background: #1a1a1a;
+      border-bottom-color: #333;
+    }
+  
+    .header h2 {
+      color: #ededed;
+    }
+  
+    .closeBtn {
+      color: #999;
+    }
+  
+    .closeBtn:hover {
+      background: #2a2a2a;
+      color: #ededed;
+    }
+  
+    .mainInfo,
+    .descricao,
+    .infoRow {
+      background: #2a2a2a;
+    }
+  
+    .section h3 {
+      color: #ededed;
+    }
+  
+    .value {
+      color: #ededed;
+    }
+  
+    .descricao {
+      color: #999;
+    }
+  
+    .statusBtn {
+      background: #2a2a2a;
+      border-color: #333;
+      color: #999;
+    }
+  
+    .statusBtn:hover {
+      background: #1e3a1e;
+      border-color: #4CAF50;
+    }
+  
+    .actions {
+      border-top-color: #333;
+    }
+  }
